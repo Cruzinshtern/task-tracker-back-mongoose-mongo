@@ -3,9 +3,17 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
+import { ConfigModule } from "@nestjs/config";
+import * as process from "process";
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb+srv://dummyuser:mypassword@cluster0.sweantc.mongodb.net/task-tracker'), UsersModule],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: `.${process.env.NODE_ENV}.env`
+    }),
+    MongooseModule.forRoot(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.sweantc.mongodb.net/${process.env.DB_DATABASE}`),
+    UsersModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
