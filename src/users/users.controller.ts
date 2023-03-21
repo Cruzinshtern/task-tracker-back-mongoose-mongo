@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dtos/create-user.dto";
 
@@ -14,5 +14,10 @@ export class UsersController {
     } catch (err){
       return err;
     }
+  }
+  
+  @Get()
+  async getUserByEmail(@Body() body: any) {
+    return await this._usersService.getUserByEmail(body);
   }
 }
