@@ -17,7 +17,7 @@ export class UsersController {
   }
   
   @Get()
-  async getUserByEmail(@Body() body: any) {
-    return await this._usersService.getUserByEmail(body);
+  getUserByEmail(@Body() body: any) {
+    return this._usersService.getUserByEmail(body.email);
   }
 }

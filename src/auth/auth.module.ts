@@ -16,6 +16,10 @@ import * as process from "process";
     forwardRef(() => UsersModule)
   ],
   providers: [AuthService],
-  controllers: [AuthController]
+  controllers: [AuthController],
+  exports: [
+    AuthService,
+    JwtModule
+  ]
 })
 export class AuthModule {}
