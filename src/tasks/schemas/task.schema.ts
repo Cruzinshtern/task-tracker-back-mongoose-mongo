@@ -16,17 +16,14 @@ export class Task {
   @Prop({ type: mongoose.Schema.Types.Number, enum: TaskStatus, default: TaskStatus.TODO })
   status: TaskStatus;
   
-  @Prop({ type: mongoose.Schema.Types.Date })
-  createdAt: Date;
+  @Prop({ type: mongoose.Schema.Types.String })
+  createdAt: string;
   
-  @Prop({ type: mongoose.Schema.Types.Date })
-  updatedAt: Date;
+  @Prop({ type: mongoose.Schema.Types.String })
+  updatedAt: string;
   
-  @Prop({ type: mongoose.Schema.Types.Date })
-  dueTo: Date;
-  
-  @Prop({ type: mongoose.Schema.Types.Date })
-  doneAt: Date;
+  @Prop({ type: mongoose.Schema.Types.String })
+  startDate: string;
   
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   createdBy: User;
