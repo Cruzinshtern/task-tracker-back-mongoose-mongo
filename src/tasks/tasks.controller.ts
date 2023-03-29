@@ -21,7 +21,7 @@ export class TasksController {
     return await this._tasksService.getAll(req);
   }
   
-  @Get('/findOneByDate')
+  @Get('/findAllByDate')
   @UseGuards(JwtAuthGuard)
   async getAllByDate(@Req() req: any, @Query() query: { startDate: string }): Promise<Task[]> {
     return await this._tasksService.getAllByDate(req, query.startDate);

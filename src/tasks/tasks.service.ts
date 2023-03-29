@@ -45,7 +45,7 @@ export class TasksService {
   
   update(task: UpdateTaskDto): Query<Task, any> {
     try {
-      return this._taskModel.findByIdAndUpdate(task._id, { ...task, updatedAt: new Date() }, { new: true });
+      return this._taskModel.findByIdAndUpdate(task._id, { ...task, updatedAt: format(new Date(), 'yyyy-MM-dd') }, { new: true });
     } catch (err) {
       return err;
     }
