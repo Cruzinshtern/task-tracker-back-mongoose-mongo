@@ -18,8 +18,7 @@ export class TasksService {
         createdBy: user.id,
         createdAt: format(new Date(), 'yyyy-MM-dd'),
         updatedAt: format(new Date(), 'yyyy-MM-dd'),
-        //TODO: remove that later when functionality is ready
-        startDate: format(new Date(), 'yyyy-MM-dd'),
+        startDate: createTaskDto.startDate,
       };
       return await this._taskModel.create(newTask);
     } catch (err) {

@@ -6,4 +6,7 @@ export class CreateTaskDto {
   
   @IsString()
   readonly description?: string;
+  
+  @IsString()
+  readonly startDate: string;
 }
