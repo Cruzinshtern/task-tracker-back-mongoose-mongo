@@ -26,9 +26,26 @@ export class TasksService {
     }
   }
   
-  async getAll(req: any): Promise<Task[]> {
+  async getAll(req: any, limit: number, page: number, sortField: string, sortDirection: 1 | -1, filterField: string, filterValue: string) {
     try {
-      return await this._getAllTodosByUser(req.user.id).exec();
+      //Define sorting criteria
+      let sortObj = {};
+      sortObj[sortField] = sortDirection;
+      //Define filtering criteria
+      let filterObj = {};
+      filterObj[filterField] = new RegExp(filterValue);
+      
+      const tasks = await this._getAllTodosByUser(req.user.id)
+        .where((filterField && filterValue) ? filterObj : {})
+        .sort((sortField && sortDirection) ? sortObj : { "_id": 1 })
+        .limit(limit)
+        .skip(limit * (page - 1))
+        .exec();
+      const allTasksCount = await this._taskModel.countDocuments({}).exec();
+      return {
+        data: tasks,
+        count: allTasksCount
+      };
     } catch (err) {
       return err;
     }
@@ -58,7 +75,7 @@ export class TasksService {
     }
   }
   
-  private _getAllTodosByUser(id: string) {
+  private _getAllTodosByUser(id: string): Query<any, any> {
     return this._taskModel.find().where('createdBy', id);
   }
 }

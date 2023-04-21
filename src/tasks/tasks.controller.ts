@@ -4,6 +4,7 @@ import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 import { CreateTaskDto } from "./dtos/create-task.dto";
 import { Task } from "./schemas/task.schema";
 import { UpdateTaskDto } from "./dtos/update-task.dto";
+import { QueryParams } from "./dtos/query-params.dto";
 
 @Controller('tasks')
 export class TasksController {
@@ -17,8 +18,8 @@ export class TasksController {
   
   @Get()
   @UseGuards(JwtAuthGuard)
-  async getAll(@Req() req: any): Promise<Task[]> {
-    return await this._tasksService.getAll(req);
+  async getAll(@Req() req: any, @Query() { limit, page, sortField, sortDirection, filterField, filterValue }: QueryParams): Promise<Task[]> {
+    return await this._tasksService.getAll(req, limit, page, sortField, sortDirection, filterField, filterValue);
   }
   
   @Get('/findAllByDate')
