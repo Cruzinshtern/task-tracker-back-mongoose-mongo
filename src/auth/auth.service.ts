@@ -8,9 +8,9 @@ import { JwtService } from "@nestjs/jwt";
 export class AuthService {
   constructor(private _userService: UsersService, private _jwtService: JwtService) {}
   
-  async login(userDto: SigninUserDto) {
+  async login(userDto: SigninUserDto): Promise<{token: string}> {
     const user = await this.validateUser(userDto);
-    return this.generateToken(user);
+    return await this.generateToken(user);
   }
   
   private async validateUser(userDto: SigninUserDto) {
@@ -22,7 +22,7 @@ export class AuthService {
     throw new UnauthorizedException({ message: 'Wrong email or password' })
   }
   
-  private async generateToken(user: any) {
+  private async generateToken(user: any): Promise<{token: string}> {
     const payload = {
       id: user.id,
       email: user.email,

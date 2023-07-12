@@ -26,7 +26,7 @@ export class TasksService {
     }
   }
   
-  async getAll(req: any, limit: number, page: number, sortField: string, sortDirection: 1 | -1, filterField: string, filterValue: string) {
+  async getAll(req: any, limit: number, page: number, sortField: string, sortDirection: 1 | -1, filterField: string, filterValue: string): Promise<any> {
     try {
       //Define sorting criteria
       let sortObj = {};
