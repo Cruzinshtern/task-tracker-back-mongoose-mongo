@@ -4,7 +4,6 @@ import { Model, QueryWithHelpers } from "mongoose";
 import { InjectModel } from "@nestjs/mongoose";
 import { CreateUserDto } from "./dtos/create-user.dto";
 import * as bcrypt from "bcrypt";
-import { TaskDocument } from "../tasks/schemas/task.schema";
 
 @Injectable()
 export class UsersService {
